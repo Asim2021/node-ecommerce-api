@@ -55,6 +55,15 @@ const productSchema = mongoose.Schema({
   }
 });
 
+///// ----- Virtuals ----- /////
+// 1.) A virtual is a property that is not stored in MongoDB. Virtuals are typically used for computed properties on documents.
+// 2.) To include virtuals in res.json(), you need to set the toJSON schema option to { virtuals: true }
+// 3.) here we will create id as virtual from _id to work our server with every application.
+
+productSchema.virtual('id').get(()=> this._id)
+productSchema.set('toJSON',{virtuals:true})
+
+
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
