@@ -8,6 +8,8 @@ const productsRouter = require("./routers/products");
 const usersRouter = require("./routers/users");
 const ordersRouter = require("./routers/orders");
 const categoryRouter = require("./routers/categories");
+const authJwt = require('./helpers/jwt');
+const errorHandler = require("./helpers/error-handler");
 
 // DEFINING CONSTANTS
 dotenv.config();
@@ -18,15 +20,21 @@ const app = express();
 // INITIATING MIDDLEWARE
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan(":method :url :status - :response-time ms"));
+app.use(morgan(":method - :url - :status - :response-time ms"));
 app.use(cors());
-app.options('*',cors())
+app.use(authJwt()) //jwt for routing
+app.use(errorHandler)
 
 // USING ROUTER
 app.use(`${api}/products`, productsRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/orders`, ordersRouter);
 app.use(`${api}/categories`, categoryRouter);
+
+// For Test
+app.get('',(req,res)=>{
+  res.send(`<h2 style="background:red">WELCOME TO SERVER</h2>`)
+})
 
 // ESTABLISHING CONNECTION TO MONGOOSE
 mongoose
@@ -39,4 +47,5 @@ app.listen(PORT, () => {
   console.log(`Server is Running at http://localhost:${PORT}`);
 });
 
-// #Chapter 05 ; Video 1 ; @ 00:00
+// #Chapter 05 ; Video 12 ; @ 00:00
+

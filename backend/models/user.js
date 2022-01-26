@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -43,4 +43,13 @@ const userSchema = mongoose.Schema({
     }
 })
 
-exports.User = mongoose.model('User', userSchema);
+userSchema.virtual('id').get(()=>{
+    return this._id;
+})
+userSchema.set('toJSON',{
+    virtuals:true,
+})
+
+User = mongoose.model('User', userSchema);
+
+module.exports = User,userSchema

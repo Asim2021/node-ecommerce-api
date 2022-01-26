@@ -7,7 +7,6 @@ const productsRouter = express.Router();
 
 /////////// --------GET--------- /////////////
 productsRouter.get("/", async (req, res) => {
-  
   const productList = await Product.find().select("name image -_id"); // or ['name','image','-_id']
   if (!productList) {
     res.send(500).json({ success: false });
@@ -17,8 +16,7 @@ productsRouter.get("/", async (req, res) => {
 });
 
 productsRouter.get("/full", async (req, res) => {
-  
-  const productList = await Product.find()
+  const productList = await Product.find();
   if (!productList) {
     res.send(500).json({ success: false });
   } else {
@@ -48,7 +46,7 @@ productsRouter.get(`/get/count`, async (req, res) => {
 });
 
 productsRouter.get(`/get/featured/:count`, async (req, res) => {
-  const count = +req.params.count
+  const count = +req.params.count;
   const products = await Product.find({ isFeatured: true }).limit(count);
 
   if (!products) {
@@ -66,21 +64,20 @@ productsRouter.get(`/get/featured/`, async (req, res) => {
   res.send(products);
 });
 
-productsRouter.get(`/`, async (req, res) =>{
+productsRouter.get(`/`, async (req, res) => {
   // localhost:3005/api/v1/products?categories=2342342,234234
   let filter = {};
-  if(req.query.categories)
-  {
-       filter = {category: req.query.categories.split(',')}
+  if (req.query.categories) {
+    filter = { category: req.query.categories.split(",") };
   }
 
-  const productList = await Product.find(filter).populate('category');
+  const productList = await Product.find(filter).populate("category");
 
-  if(!productList) {
-      res.status(500).json({success: false})
-  } 
+  if (!productList) {
+    res.status(500).json({ success: false });
+  }
   res.send(productList);
-})
+});
 
 /////////// --------PUT & POST--------- /////////////
 productsRouter.post("/", async (req, res) => {
