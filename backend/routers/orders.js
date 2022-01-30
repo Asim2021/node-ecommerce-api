@@ -61,6 +61,26 @@ ordersRouter.get(`/:id`, async (req, res) => {
   res.send(order);
 });
 
+ordersRouter.get(`/get/userorders/:id`, async (req, res) => {
+  const userorderlist = await Order.find({user:req.params.id})
+    .populate({
+      path: "orderItems",
+      populate: {
+        path: "product",
+        select: "name category -_id",
+        populate: {
+          path: "category",
+          select: "name -_id",
+        },
+      },
+    }).sort({'dateOrdered':-1});
+
+  if (!userorderlist) {
+    res.status(500).json({ success: false });
+  }
+  res.send(userorderlist);
+});
+
 /////////// -------- PUT & POST --------- /////////////
 ordersRouter.post("/", async (req, res) => {
   let {
