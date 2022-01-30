@@ -7,7 +7,7 @@ const productsRouter = express.Router();
 
 /////////// --------GET--------- /////////////
 productsRouter.get("/", async (req, res) => {
-  const productList = await Product.find().select("name image -_id"); // or ['name','image','-_id']
+  const productList = await Product.find().select("name image"); // or ['name','image','-_id']
   if (!productList) {
     res.send(500).json({ success: false });
   } else {
@@ -16,7 +16,7 @@ productsRouter.get("/", async (req, res) => {
 });
 
 productsRouter.get("/full", async (req, res) => {
-  const productList = await Product.find();
+  const productList = await Product.find().populate('category');
   if (!productList) {
     res.send(500).json({ success: false });
   } else {
@@ -81,6 +81,7 @@ productsRouter.get(`/`, async (req, res) => {
 
 /////////// --------PUT & POST--------- /////////////
 productsRouter.post("/", async (req, res) => {
+  typeof(req.body)
   let {
     name,
     description,

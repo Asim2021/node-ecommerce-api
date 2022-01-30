@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan(":method - :url - :status - :response-time ms"));
 app.use(cors());
-app.use(authJwt()) //jwt for routing
+// app.use(authJwt()) //jwt for routing
 app.use(errorHandler)
 
 // USING ROUTER
@@ -47,5 +47,5 @@ app.listen(PORT, () => {
   console.log(`Server is Running at http://localhost:${PORT}`);
 });
 
-// #Chapter 05 ; Video 12 ; @ 00:00
+// #Chapter 06 ; Video 04 ; @ 00:00
 
