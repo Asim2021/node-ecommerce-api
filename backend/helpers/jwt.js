@@ -15,6 +15,7 @@ function authJwt(){
         isRevoked:isRevoked  // BY THIS WE DEFINE THE PERMISSION OF USER AS PER ADMIN OR LOCAL USER
     }).unless({path:[
         {url:/\/api\/v1\/products(.*)/,methods:['GET','OPTIONS']},
+        {url:/\/public\/uploads(.*)/,methods:['GET','OPTIONS']},
         {url:/\/api\/v1\/categories(.*)/,methods:['GET','OPTIONS']},
         `${api}/users/login`,
         `${api}/users/register`,

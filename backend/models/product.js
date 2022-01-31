@@ -67,3 +67,21 @@ productSchema.set('toJSON',{virtuals:true})
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
+
+
+/*
+{
+        "name": "realme narzo 50i",
+        "description": "realme narzo 50i with 4GB RAM and 64GB Storage,8MP Primary and 5MP Front Camera",
+        "richDescription": "The large display of realme narzo 50i comes with a screen ratio that reaches 88.7%, making it more immersive for games and movies.realme narzo 50i comes with a massive battery that supports up to 43 days in standby. Whether gaming, calling or entertainment, realme narzo 50i is built to last. Its Super Power Saving Mode lets you go on even at 5% power.Multi-task, play games and enjoy content on the realme narzo 50i seamlessly, thanks to its powerful Octa-core processor.",
+        "image": "",
+        "images": [],
+        "brand": "Realme",
+        "price": 8999,
+        "category":"61ea88665a5b1a79135b946d",
+        "countInStock": 26,
+        "rating": 4,
+        "numReviews": 21,
+        "isFeatured": true
+}
+*/

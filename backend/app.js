@@ -22,8 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan(":method - :url - :status - :response-time ms"));
 app.use(cors());
-// app.use(authJwt()) //jwt for routing
+app.use(authJwt()) //jwt for routing
 app.use(errorHandler)
+app.use('/public/uploads',express.static(__dirname+'/public/uploads'))
 
 // USING ROUTER
 app.use(`${api}/products`, productsRouter);
@@ -47,5 +48,5 @@ app.listen(PORT, () => {
   console.log(`Server is Running at http://localhost:${PORT}`);
 });
 
-// #Chapter 06 ; Video 04 ; @ 00:00
+
 
